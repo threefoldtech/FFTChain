@@ -5,8 +5,8 @@ template:
   version: master
 frontend:
   caddy:
-    dns: explorer.example.com
-    tls: support@example.com
+    dns: explorer.testnet.fft.threefold.tech
+    tls: support@threefold.tech
 blockchain:
   name: fftchain
   repository: github.com/threefoldtech/FFTChain
@@ -61,10 +61,10 @@ blockchain:
         transactionSetSizeLimit: 250000
         poolSizeLimit: 19750000
       bootstrapPeers:
-      - bootstrap1.testnet.fft.threefold.tech:21112
-      - bootstrap2.testnet.fft.threefold.tech:21112
-      - bootstrap3.testnet.fft.threefold.tech:21112
-      - bootstrap4.testnet.fft.threefold.tech:21112
+      - bootstrap1.testnet.fft.threefold.tech:22312
+      - bootstrap2.testnet.fft.threefold.tech:22312
+      - bootstrap3.testnet.fft.threefold.tech:22312
+      - bootstrap4.testnet.fft.threefold.tech:22312
     devnet:
       networkType: 3
       genesis:

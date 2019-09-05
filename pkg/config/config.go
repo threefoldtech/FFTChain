@@ -197,10 +197,10 @@ func GetTestnetGenesis() types.ChainConstants {
 
 func GetTestnetBootstrapPeers() []modules.NetAddress {
 	return []modules.NetAddress{ 
-		"bootstrap1.testnet.fft.threefold.tech:21112",
-		"bootstrap2.testnet.fft.threefold.tech:21112",
-		"bootstrap3.testnet.fft.threefold.tech:21112",
-		"bootstrap4.testnet.fft.threefold.tech:21112",
+		"bootstrap1.testnet.fft.threefold.tech:22312",
+		"bootstrap2.testnet.fft.threefold.tech:22312",
+		"bootstrap3.testnet.fft.threefold.tech:22312",
+		"bootstrap4.testnet.fft.threefold.tech:22312",
 	}
 }
 

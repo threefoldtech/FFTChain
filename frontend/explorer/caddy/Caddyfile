@@ -1,8 +1,8 @@
-http://explorer.example.com {
-    redir https://explorer.example.com
+http://explorer.testnet.fft.threefold.tech {
+    redir https://explorer.testnet.fft.threefold.tech
 }
 
-https://explorer.example.com {
+https://explorer.testnet.fft.threefold.tech {
     root ../public
 
     header / {
@@ -20,5 +20,5 @@ https://explorer.example.com {
     }
 
     log stdout
-    tls support@example.com
+    tls support@threefold.tech
 }
