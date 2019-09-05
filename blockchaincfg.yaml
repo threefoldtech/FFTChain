@@ -1,0 +1,99 @@
+template:
+  repository:
+    owner: threefoldtech
+    repo: rivine-chain-template
+  version: master
+frontend:
+  caddy:
+    dns: explorer.example.com
+    tls: support@example.com
+blockchain:
+  name: fftchain
+  repository: github.com/threefoldtech/FFTChain
+  currency:
+    unit: FFT
+    precision: 9
+  ports:
+    api: 22311
+    rpc: 22312
+  binaries:
+    client: fftchainc
+    daemon: fftchaind
+  transactions:
+    default:
+      version: 1
+    minting:
+      conditionUpdate:
+        version: 128
+      coinCreation:
+        version: 129
+      coinDestruction:
+        version: 130
+  networks:
+    testnet:
+      networkType: 2
+      genesis:
+        coinOutputs:
+        - value: "200000000"
+          condition: 012baf6a2019b8184328f9ddc13e8aa6484c3272d98411444bdd743e9bb62e3572568ce6dc63bf
+        blockStakeOutputs:
+        - value: "2000"
+          condition: 012baf6a2019b8184328f9ddc13e8aa6484c3272d98411444bdd743e9bb62e3572568ce6dc63bf
+        minting: 012baf6a2019b8184328f9ddc13e8aa6484c3272d98411444bdd743e9bb62e3572568ce6dc63bf
+        genesisBlockTimestamp: 1567691594
+      transactionFeePool: 012baf6a2019b8184328f9ddc13e8aa6484c3272d98411444bdd743e9bb62e3572568ce6dc63bf
+      blockSizeLimit: 2000000
+      arbitraryDataSizeLimit: 83
+      blockCreatorFee: "0.0"
+      minimumTransactionFee: "0.1"
+      blockFrequency: 120
+      maturityDelay: 720
+      medianTimestampWindow: 11
+      targetWindow: 1000
+      maxAdjustmentUp: 25/10
+      maxAdjustmentDown: 10/25
+      futureTreshold: 3000000000
+      extremeFutureTreshold: 6000000000
+      stakeModifierDelay: 20000000000
+      blockStakeAging: 1024000000000
+      transactionPool:
+        transactionSizeLimit: 16000
+        transactionSetSizeLimit: 250000
+        poolSizeLimit: 19750000
+      bootstrapPeers:
+      - bootstrap1.testnet.fft.threefold.tech:21112
+      - bootstrap2.testnet.fft.threefold.tech:21112
+      - bootstrap3.testnet.fft.threefold.tech:21112
+      - bootstrap4.testnet.fft.threefold.tech:21112
+    devnet:
+      networkType: 3
+      genesis:
+        coinOutputs:
+        - value: "200000000"
+          condition: 015a080a9259b9d4aaa550e2156f49b1a79a64c7ea463d810d4493e8242e6791584fbdac553e6f
+        blockStakeOutputs:
+        - value: "2000"
+          condition: 015a080a9259b9d4aaa550e2156f49b1a79a64c7ea463d810d4493e8242e6791584fbdac553e6f
+        minting: 015a080a9259b9d4aaa550e2156f49b1a79a64c7ea463d810d4493e8242e6791584fbdac553e6f
+        genesisBlockTimestamp: 1567691594
+      transactionFeePool: 015a080a9259b9d4aaa550e2156f49b1a79a64c7ea463d810d4493e8242e6791584fbdac553e6f
+      blockSizeLimit: 2000000
+      arbitraryDataSizeLimit: 83
+      blockCreatorFee: "0.0"
+      minimumTransactionFee: "0.1"
+      blockFrequency: 12
+      maturityDelay: 10
+      medianTimestampWindow: 11
+      targetWindow: 20
+      maxAdjustmentUp: 120/100
+      maxAdjustmentDown: 100/120
+      futureTreshold: 120000000000
+      extremeFutureTreshold: 180000000000
+      stakeModifierDelay: 2000000000000
+      blockStakeAging: 1024000000000
+      transactionPool:
+        transactionSizeLimit: 16000
+        transactionSetSizeLimit: 250000
+        poolSizeLimit: 19750000
+      bootstrapPeers:
+      - localhost:23112
