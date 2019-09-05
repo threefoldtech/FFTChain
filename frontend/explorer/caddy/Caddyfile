@@ -1,0 +1,24 @@
+http://explorer.example.com {
+    redir https://explorer.example.com
+}
+
+https://explorer.example.com {
+    root ../public
+
+    header / {
+	    Access-Control-Allow-Origin  *
+        Access-Control-Allow-Methods  *
+        Access-Control-Allow-Headers  *
+    }
+
+    proxy /explorer localhost:22311 {
+        header_upstream User-Agent Rivine-Agent
+    }
+
+    proxy /transactionpool/transactions localhost:22311 {
+        header_upstream User-Agent Rivine-Agent
+    }
+
+    log stdout
+    tls support@example.com
+}
