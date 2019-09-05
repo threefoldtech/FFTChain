@@ -1,0 +1,2 @@
+# FFTChain
+FreeFlowToken Chain
