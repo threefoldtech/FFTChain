@@ -20,9 +20,9 @@ function toTitleCase(str) {
 // siacoins.
 function readableCoins(hastings) {
 	if (hastings < 1000000000000000000) {
-		return addCommasToNumber((hastings / 1000000000)) + " GFT";
+		return addCommasToNumber((hastings / 1000000000)) + " FFT";
 	} else {
-		return addCommasToNumber((hastings / 1000000000000000000)) + " billion GFT";
+		return addCommasToNumber((hastings / 1000000000000000000)) + " billion FFT";
 	}
 }
 
