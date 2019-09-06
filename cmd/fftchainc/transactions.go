@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/threefoldtech/rivine/types"
 	fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
 	"github.com/threefoldtech/rivine/extensions/minting"
 	mintingcli "github.com/threefoldtech/rivine/extensions/minting/client"
-	
+	"github.com/threefoldtech/rivine/types"
 
 	"github.com/threefoldtech/rivine/pkg/client"
 )
@@ -17,7 +16,6 @@ func RegisterDevnetTransactions(cli *client.CommandLineClient) {
 func RegisterTestnetTransactions(cli *client.CommandLineClient) {
 	registerTransactions(cli)
 }
-
 
 func registerTransactions(cli *client.CommandLineClient) {
 	// create minting plugin client...
@@ -35,5 +33,4 @@ func registerTransactions(cli *client.CommandLineClient) {
 		TransactionVersion: fftchaintypes.TransactionVersionCoinDestruction,
 	})
 
-	
 }

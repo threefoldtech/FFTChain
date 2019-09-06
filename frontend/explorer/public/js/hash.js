@@ -282,7 +282,7 @@ function appendV1Transaction(infoBody, explorerTransaction, confirmed) {
 		appendStatTableTitle(infoBody, 'Blockstake Inputs');
 		for (var i = 0; i < explorerTransaction.rawtransaction.data.blockstakeinputs.length; i++) {
 			var f;
-			switch (explorerTransaction.rawtransaction.data.blockstakeinputs[i].fulfillment.type) {				
+			switch (explorerTransaction.rawtransaction.data.blockstakeinputs[i].fulfillment.type) {
 				case 0:
 					break;
 				case 1:
@@ -751,13 +751,12 @@ function addV1T3Input(infoBody, explorerTransaction, i, type) {
 	var doms = appendStat(table, 'ID', '');
 	linkHash(doms[2], explorerTransaction.rawtransaction.data[inputspecifier][i].parentid);
 
-	
 	var amount = explorerTransaction[inputoutputspecifier][i].value;
 	if (type === 'coins') {
 		amount = readableCoins(amount);
 	}
 	appendStat(table, 'Value', amount);
-	
+
 	appendStatHeader(table, 'Condition');
 	appendStat(table, 'Type', explorerTransaction[inputoutputspecifier][i].condition.type);
 	var rawInput = explorerTransaction[inputoutputspecifier][i];
@@ -805,11 +804,11 @@ function addV1NilOutput(_ctx, table, explorerTransaction, i, type, outputs) {
 
 	var doms = appendStat(table, 'ID', '');
 	linkHash(doms[2], explorerTransaction[outputidspecifier][i]);
-	
+
 	var locked = addVNilCondition(_ctx, table);
 
 	if (outputs == null) {
-		var outputspecifier = getOutputSpecifier(type);	
+		var outputspecifier = getOutputSpecifier(type);
 		outputs = explorerTransaction.rawtransaction.data[outputspecifier];
 	}
 
@@ -837,7 +836,7 @@ function addV1T1Output(_ctx, table, explorerTransaction, i, type, outputs) {
 	linkHash(doms[2], explorerTransaction[outputidspecifier][i]);
 
 	if (outputs == null) {
-		var outputspecifier = getOutputSpecifier(type);	
+		var outputspecifier = getOutputSpecifier(type);
 		outputs = explorerTransaction.rawtransaction.data[outputspecifier];
 	}
 
@@ -865,7 +864,7 @@ function addV1T2Output(_ctx, table, explorerTransaction, i, type, outputs) {
 	var outputunlockhashesspecifier = getOutputUnlockHashesSpecifier(type);
 
 	if (outputs == null) {
-		var outputspecifier = getOutputSpecifier(type);	
+		var outputspecifier = getOutputSpecifier(type);
 		outputs = explorerTransaction.rawtransaction.data[outputspecifier];
 	}
 
@@ -915,7 +914,7 @@ function addV1T3Output(ctx, table, explorerTransaction, i, type, outputs) {
 	linkHash(doms[2], explorerTransaction[outputidspecifier][i]);
 
 	if (outputs == null) {
-		var outputspecifier = getOutputSpecifier(type);	
+		var outputspecifier = getOutputSpecifier(type);
 		outputs = explorerTransaction.rawtransaction.data[outputspecifier];
 	}
 
@@ -930,7 +929,7 @@ function addV1T3Output(ctx, table, explorerTransaction, i, type, outputs) {
 		amount = readableCoins(amount);
 	}
 	appendStat(table, 'Value', amount);
-	
+
 	return {
 		value: output.value,
 		locked: locked,
@@ -982,7 +981,7 @@ function addV1T4Output(_ctx, table, explorerTransaction, i, type, outputs) {
 	linkHash(doms[2], explorerTransaction[outputidspecifier][i]);
 
 	if (outputs == null) {
-		var outputspecifier = getOutputSpecifier(type);	
+		var outputspecifier = getOutputSpecifier(type);
 		outputs = explorerTransaction.rawtransaction.data[outputspecifier];
 	}
 
@@ -1234,7 +1233,7 @@ function appendUnlockHashTransactionElements(domParent, hash, explorerHash, addr
 		for (var i = 0; i < scoids.length; i++) {
 			if (scoidMatches[i] == true) {
 				appendStat(tables[i], 'Has Been Spent', 'Yes');
-				
+
 			} else {
 				appendStat(tables[i], 'Has Been Spent', 'No');
 				if (values[i].confirmed) {
@@ -1466,7 +1465,7 @@ function appendUnlockHashTables(domParent, hash, explorerHash) {
 			addressLabel = "Multisig Address";
 			break;
 	}
-	// add title 
+	// add title
 	var titleHolder = document.createElement('h2');
 	titleHolder.appendChild(document.createTextNode(hashTitle));
 	domParent.appendChild(titleHolder);
@@ -1515,7 +1514,7 @@ function appendUnlockHashTables(domParent, hash, explorerHash) {
 				if (j == 0) {
 					sourceDesc = 'Block Creator Reward';
 				} else if (j == 1) {
-					sourceDesc = 'Transactions Fee Payout'; 
+					sourceDesc = 'Transactions Fee Payout';
 				} else {
 					// try to get specific title for this custom Miner Fee Payout
 					var targetIndex = j - 2;
@@ -1817,9 +1816,9 @@ function appendRawTransaction(infoBody, rawTx) {
 	container.classList.add('raw', 'hidden');
 	var block = document.createElement('CODE');
 	block.textContent = JSON.stringify(rawTx);
-	
+
 	buttonContainer.appendChild(button);
-	infoBody.appendChild(buttonContainer);	
+	infoBody.appendChild(buttonContainer);
 	container.appendChild(block);
 	infoBody.appendChild(container);
 }
@@ -2006,7 +2005,7 @@ function appendNavigationMenuCoinOutput(explorerHash, hash) {
 					linkHash(outputSpan, explorerHash.transactions[i].coinoutputids[j], 'Coin Output');
 					return;
 				}
-			} 
+			}
 		}
 	}
 	if (explorerHash.blocks == null) {
@@ -2252,10 +2251,10 @@ function buildErrorPage(hash) {
 				'The transaction, Block, Coin Output or Blockstake Output'+
 				' &mdash;referenced by the given identifier&mdash; might have been reverted as part of a fork');
 		} else {
-			title += ' has an invalid length;'	
+			title += ' has an invalid length;'
 		}
 		makeErrorMessage(errorBody, title, suggestions);
-	
+
 		// add a last suggestion
 		var lastSuggestion = document.createElement('div');
 		errorBody.appendChild(lastSuggestion)
@@ -2278,7 +2277,7 @@ function buildErrorPage(hash) {
 		'Unlock Hashes &mdash;meaning Wallet and Contract Addresses&mdash; have a length of 78 characters'
 	]
 	makeErrorMessage(errorBody, title, suggestions);
-} 
+}
 
 function makeErrorMessage(body, title, suggestions) {
 	var errorMessage = document.createElement('div');
@@ -2314,7 +2313,7 @@ function appendSearchHash() {
 
 	text.innerHTML = "Would you like to try again? Please correct your hash, and paste it here in order to search for it:";
 
-	searchField.required = true;              
+	searchField.required = true;
 	searchField.setAttribute('name', 'hash');
 
 	searchButton.setAttribute('value', 'go');

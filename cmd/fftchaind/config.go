@@ -12,7 +12,7 @@ type ExtendedDaemonConfig struct {
 // DefaultConfig returns the default daemon configuration
 func DefaultConfig() daemon.Config {
 	cfg := daemon.DefaultConfig()
-	cfg.APIaddr = "22311"
+	cfg.APIaddr = "localhost:22311"
 	cfg.RPCaddr = ":22312"
 	return cfg
 }

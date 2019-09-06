@@ -11,7 +11,6 @@ import (
 
 	"github.com/threefoldtech/FFTChain/pkg/types"
 	mintingcli "github.com/threefoldtech/rivine/extensions/minting/client"
-	
 
 	"github.com/threefoldtech/rivine/modules"
 	"github.com/threefoldtech/rivine/pkg/client"
@@ -39,8 +38,6 @@ func main() {
 		},
 	)
 
-	
-
 	// define preRun function
 	cliClient.PreRunE = func(cfg *client.Config) (*client.Config, error) {
 		if cfg == nil {
@@ -52,15 +49,14 @@ func main() {
 		}
 
 		switch cfg.NetworkName {
-		
+
 		case config.NetworkNameDevnet:
 			RegisterDevnetTransactions(cliClient.CommandLineClient)
 			cfg.GenesisBlockTimestamp = 1567691594 // timestamp of block #1
-		
+
 		case config.NetworkNameTestnet:
 			RegisterTestnetTransactions(cliClient.CommandLineClient)
 			cfg.GenesisBlockTimestamp = 1567691594 // timestamp of block #1
-		
 
 		default:
 			return nil, fmt.Errorf("Network name %q not recognized", cfg.NetworkName)

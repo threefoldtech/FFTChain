@@ -10,5 +10,3 @@ const (
 	//TransactionVersionCoinDestruction is the transaction version for the coin destruction transaction
 	TransactionVersionCoinDestruction types.TransactionVersion = 130
 )
-
-

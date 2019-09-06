@@ -13,11 +13,9 @@ import (
 	"github.com/threefoldtech/FFTChain/pkg/config"
 
 	fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
-	"github.com/threefoldtech/rivine/types"
 	"github.com/threefoldtech/rivine/extensions/minting"
 	mintingapi "github.com/threefoldtech/rivine/extensions/minting/api"
-
-	
+	"github.com/threefoldtech/rivine/types"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/threefoldtech/rivine/modules"
@@ -110,8 +108,7 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 		}
 
 		var cs modules.ConsensusSet
-		var mintingPlugin    *minting.Plugin
-		
+		var mintingPlugin *minting.Plugin
 
 		if moduleIdentifiers.Contains(daemon.ConsensusSetModule.Identifier()) {
 			printModuleIsLoading("consensus set")
@@ -137,7 +134,7 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 				setupNetworkCfg.GenesisMintCondition,
 				fftchaintypes.TransactionVersionMinterDefinition,
 				fftchaintypes.TransactionVersionCoinCreation,
-			&minting.PluginOptions{
+				&minting.PluginOptions{
 					CoinDestructionTransactionVersion: fftchaintypes.TransactionVersionCoinDestruction,
 				},
 			)
@@ -154,7 +151,6 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 			// add the HTTP handlers for the auth coin tx extension as well
 			mintingapi.RegisterConsensusMintingHTTPHandlers(router, mintingPlugin)
 
-			
 		}
 
 		var tpool modules.TransactionPool
@@ -239,7 +235,7 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 			}()
 
 			mintingapi.RegisterExplorerMintingHTTPHandlers(router, mintingPlugin)
-			
+
 		}
 
 		fmt.Println("Setting up root HTTP API handler...")
@@ -310,7 +306,6 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 type setupNetworkConfig struct {
 	NetworkConfig        daemon.NetworkConfig
 	GenesisMintCondition types.UnlockConditionProxy
-	
 }
 
 // setupNetwork injects the correct chain constants and genesis nodes based on the chosen network,
@@ -321,7 +316,7 @@ func setupNetwork(cfg ExtendedDaemonConfig) (setupNetworkConfig, error) {
 	// return the network configuration, based on the network name,
 	// which includes the genesis block as well as the bootstrap peers
 	switch cfg.BlockchainInfo.NetworkName {
-	
+
 	case config.NetworkNameDevnet:
 		constants := config.GetDevnetGenesis()
 		bootstrapPeers := cfg.BootstrapPeers
@@ -335,9 +330,8 @@ func setupNetwork(cfg ExtendedDaemonConfig) (setupNetworkConfig, error) {
 				BootstrapPeers: bootstrapPeers,
 			},
 			GenesisMintCondition: config.GetDevnetGenesisMintCondition(),
-			
 		}, nil
-	
+
 	case config.NetworkNameTestnet:
 		constants := config.GetTestnetGenesis()
 		bootstrapPeers := cfg.BootstrapPeers
@@ -351,9 +345,7 @@ func setupNetwork(cfg ExtendedDaemonConfig) (setupNetworkConfig, error) {
 				BootstrapPeers: bootstrapPeers,
 			},
 			GenesisMintCondition: config.GetTestnetGenesisMintCondition(),
-			
 		}, nil
-	
 
 	default:
 		// network isn't recognised
