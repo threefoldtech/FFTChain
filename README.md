@@ -1,6 +1,6 @@
-# fftchain Blockchain
+# Freeflow Token Blockchain
 
-The fftchain Blockchain repository.
+The Freeflow Token Blockchain repository.
 
 ## How to use fftchainc
 

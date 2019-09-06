@@ -9,6 +9,7 @@ frontend:
     tls: support@threefold.tech
 blockchain:
   name: fftchain
+  longName: Freeflow Token
   repository: github.com/threefoldtech/FFTChain
   currency:
     unit: FFT
