@@ -691,6 +691,8 @@ function addV1T1Input(infoBody, explorerTransaction, i, type) {
 	appendStatHeader(table, 'Fulfillment');
 	addV1Fulfillment(table, explorerTransaction.rawtransaction.data[inputspecifier][i].fulfillment)
 	infoBody.appendChild(table);
+
+	return {amount: explorerTransaction[inputoutputspecifier][i].value};
 }
 
 function addV1Fulfillment(table, fulfillment) {
@@ -727,6 +729,8 @@ function addV1T2Input(infoBody, explorerTransaction, i, type) {
 	appendStatHeader(table, 'Fulfillment');
 	addV2Fulfillment(table, explorerTransaction.rawtransaction.data[inputspecifier][i].fulfillment);
 	infoBody.appendChild(table);
+
+	return {amount: explorerTransaction[inputoutputspecifier][i].value};
 }
 
 function addV2Fulfillment(table, fulfillment) {
@@ -773,6 +777,8 @@ function addV1T3Input(infoBody, explorerTransaction, i, type) {
 	appendStatHeader(table, 'Fulfillment');
 	addV3Fulfillment(table, explorerTransaction.rawtransaction.data[inputspecifier][i].rawInput.fulfillment)
 	infoBody.appendChild(table);
+
+	return {amount: explorerTransaction[inputoutputspecifier][i].value};
 }
 
 function addV3Fulfillment(table, fulfillment) {
@@ -1857,8 +1863,9 @@ function populateHashPage(hash, explorerHash, hashTypeStr) {
 function getCoinOutputsFromExplorerTransaction(txn) {
 	if (txn.rawtransaction.data && txn.rawtransaction.data.coinoutputs) {
 		return txn.rawtransaction.data.coinoutputs;
+	}if (txn.rawtransaction.version == 130) {
+		return [txn.rawtransaction.data.refundcoinoutput];
 	}
-	var version = txn.rawtransaction.version;
 	return [];
 }
 

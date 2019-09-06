@@ -1,16 +1,16 @@
 # Explorer
 
-A block explorer for a Rivine-based chain
+A block explorer for Freeflow Token
 
 ## Run it yourself
 
 ### Prerequisites
 * Caddyserver
-* A Rivine-based daemon
+* Freeflow Token daemon (`fftchaind`)
 
 
-Make sure you have a Rivine-based daemon running with the explorer module enabled:
-`<rivine-based daemon cli name> -M cgte`
+Make sure you have `fftchaind` (the Freeflow Token daemon) running with the explorer module enabled:
+`fftchaind -M cgte`
 
 Now start caddy from the `caddy` folder of this repository:
 `caddy -conf Caddyfile.local`
