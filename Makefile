@@ -42,4 +42,9 @@ install-std:
 	go build -ldflags '$(ldflagsversion)' -o $(daemonbin) $(daemonpkgs)
 	go build -ldflags '$(ldflagsversion)' -o $(clientbin) $(clientpkgs)
 
-.PHONY: all test fmt vet install install-std
+# installs std (release) binaries with profiling enabled on http on port 10501
+install-profile-std:
+	go build -tags='profile' -ldflags '$(ldflagsversion)' -o $(daemonbin) $(daemonpkgs)
+	go build -ldflags '$(ldflagsversion)' -o $(clientbin) $(clientpkgs)
+
+.PHONY: all test fmt vet install install-std install-profile-std
