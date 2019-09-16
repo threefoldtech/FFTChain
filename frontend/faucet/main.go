@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"sync"
 
-	fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
 	"github.com/threefoldtech/rivine/modules"
 	"github.com/threefoldtech/rivine/pkg/api"
 	"github.com/threefoldtech/rivine/pkg/daemon"

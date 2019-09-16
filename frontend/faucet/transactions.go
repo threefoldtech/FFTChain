@@ -2,11 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
 	"log"
 
-	fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
 	"github.com/threefoldtech/rivine/pkg/api"
 	"github.com/threefoldtech/rivine/types"
 )
