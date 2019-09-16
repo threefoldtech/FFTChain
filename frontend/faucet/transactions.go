@@ -2,13 +2,23 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"log"
 
+	
 	"github.com/threefoldtech/rivine/pkg/api"
 	"github.com/threefoldtech/rivine/types"
+  fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
+	
 )
 
+
+
+
+
 func dripCoins(address types.UnlockHash, amount types.Currency) (types.TransactionID, error) {
+	
 
 	data, err := json.Marshal(api.WalletCoinsPOST{
 		CoinOutputs: []types.CoinOutput{
@@ -31,3 +41,5 @@ func dripCoins(address types.UnlockHash, amount types.Currency) (types.Transacti
 	}
 	return resp.TransactionID, err
 }
+
+

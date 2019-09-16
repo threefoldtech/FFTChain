@@ -1,8 +1,4 @@
-http://explorer.testnet.fft.threefold.tech {
-    redir https://explorer.testnet.fft.threefold.tech
-}
-
-https://explorer.testnet.fft.threefold.tech {
+explorer.testnet.fft.threefold.tech {
     root ../public
 
     header / {

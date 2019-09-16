@@ -70,3 +70,5 @@ var coinConfirmationTemplate = mustTemplate("coinconfirmation.html", fmt.Sprintf
 	</div>
 </body>
 `, coinsToGive))
+
+

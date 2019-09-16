@@ -2,9 +2,14 @@ template:
   repository: "github.com/threefoldtech/rivine-chain-template"
   version: master
 frontend:
-  caddy:
-    dns: explorer.testnet.fft.threefold.tech
-    tls: support@threefold.tech
+  explorer:
+    caddy:
+      dns: explorer.testnet.fft.threefold.tech
+      tls: support@threefold.tech
+  faucet:
+    caddy:
+      dns: faucet.testnet.fft.threefold.tech
+      tls: support@threefold.tech
 blockchain:
   name: fftchain
   longName: Freeflow Token
