@@ -7,12 +7,11 @@ import (
 	"net/http"
 	"sync"
 
+	fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
 	"github.com/threefoldtech/rivine/modules"
 	"github.com/threefoldtech/rivine/pkg/api"
 	"github.com/threefoldtech/rivine/pkg/daemon"
 	"github.com/threefoldtech/rivine/types"
-  fftchaintypes "github.com/threefoldtech/FFTChain/pkg/types"
-	
 )
 
 type faucet struct {
@@ -63,11 +62,9 @@ func main() {
 
 	http.HandleFunc("/", f.requestFormHandler)
 	http.HandleFunc("/request/tokens", f.requestTokensHandler)
-	
 
 	// register API endpoint
 	http.HandleFunc("/api/v1/coins", f.requestCoins)
-	
 
 	log.Println("[INFO] Faucet ready to serve")
 
@@ -80,5 +77,5 @@ func init() {
 	flag.StringVar(&httpClient.RootURL, "daemon-address", httpClient.RootURL, "address of the daemon (with unlocked wallet) to talk to")
 	flag.Uint64Var(&coinsToGive, "fund-amount", coinsToGive, "amount of coins to give per drip of the faucet")
 	flag.Parse()
-	
+
 }

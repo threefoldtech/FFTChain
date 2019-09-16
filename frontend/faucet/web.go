@@ -9,8 +9,6 @@ import (
 	"github.com/threefoldtech/rivine/types"
 )
 
-
-
 func (f *faucet) requestFormHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "" && r.URL.Path != "/" {
 		http.Error(w, fmt.Errorf("%s is not a valid path", r.URL.Path).Error(), http.StatusNotFound)
@@ -43,7 +41,7 @@ func (f *faucet) requestTokensHandler(w http.ResponseWriter, r *http.Request) {
 	f.mu.Lock()
 	defer f.mu.Unlock()
 	txID, err := dripCoins(uh, f.coinsToGive)
-	
+
 	if err != nil {
 		log.Println("[ERROR] Failed to drip coins:", err.Error())
 		renderRequestTemplate(w, RequestBody{
@@ -64,8 +62,6 @@ func (f *faucet) requestTokensHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("[INFO] Sent %s tokens to %s\n", f.coinsToGive.String(), strUH)
 }
 
-
-
 func renderRequestTemplate(w http.ResponseWriter, body RequestBody) {
 	err := requestTemplate.ExecuteTemplate(w, "request.html", body)
 	if err != nil {
@@ -81,5 +77,3 @@ func renderCoinConfirmationTemplate(w http.ResponseWriter, body CoinConfirmation
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
-
-

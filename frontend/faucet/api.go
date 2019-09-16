@@ -47,7 +47,7 @@ func (f *faucet) requestCoins(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Println("[ERROR] Failed to drip coins:", err)
-		
+
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -57,8 +57,6 @@ func (f *faucet) requestCoins(w http.ResponseWriter, r *http.Request) {
 		TxID types.TransactionID `json:"txid"`
 	}{TxID: txID})
 }
-
-
 
 func addCorsHeaders(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
