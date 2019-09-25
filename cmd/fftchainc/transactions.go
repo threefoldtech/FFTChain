@@ -9,17 +9,17 @@ import (
 	"github.com/threefoldtech/rivine/pkg/client"
 )
 
-func RegisterDevnetTransactions(cli *client.CommandLineClient) {
-	registerTransactions(cli)
+func RegisterDevnetTransactions(bc *client.BaseClient) {
+	registerTransactions(bc)
 }
 
-func RegisterTestnetTransactions(cli *client.CommandLineClient) {
-	registerTransactions(cli)
+func RegisterTestnetTransactions(bc *client.BaseClient) {
+	registerTransactions(bc)
 }
 
-func registerTransactions(cli *client.CommandLineClient) {
+func registerTransactions(bc *client.BaseClient) {
 	// create minting plugin client...
-	mintingCLI := mintingcli.NewPluginConsensusClient(cli)
+	mintingCLI := mintingcli.NewPluginConsensusClient(bc)
 	// ...and register minting types
 	types.RegisterTransactionVersion(fftchaintypes.TransactionVersionMinterDefinition, minting.MinterDefinitionTransactionController{
 		MintConditionGetter: mintingCLI,

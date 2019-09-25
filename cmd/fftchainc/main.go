@@ -48,14 +48,19 @@ func main() {
 			cfg = &newCfg
 		}
 
+		bc, err := client.NewBaseClientFromCommandLineClient(cliClient.CommandLineClient)
+		if err != nil {
+			return nil, err
+		}
+
 		switch cfg.NetworkName {
 
 		case config.NetworkNameDevnet:
-			RegisterDevnetTransactions(cliClient.CommandLineClient)
+			RegisterDevnetTransactions(bc)
 			cfg.GenesisBlockTimestamp = 1567691594 // timestamp of block #1
 
 		case config.NetworkNameTestnet:
-			RegisterTestnetTransactions(cliClient.CommandLineClient)
+			RegisterTestnetTransactions(bc)
 			cfg.GenesisBlockTimestamp = 1567691594 // timestamp of block #1
 
 		default:

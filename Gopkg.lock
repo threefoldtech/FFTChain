@@ -98,16 +98,27 @@
   version = "v0.0.5"
 
 [[projects]]
-  digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
+  digest = "1:524b71991fc7d9246cc7dc2d9e0886ccb97648091c63e30eef619e6862c955dd"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "UT"
-  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
-  version = "v1.0.3"
+  revision = "2e9d26c8c37aae03e3f9d4e90b7116f5accb7cab"
+  version = "v1.0.5"
 
 [[projects]]
   branch = "master"
-  digest = "1:eff8d8ea11c0756e1caea71cdac7b2bfbe4b3f105b504ce65ae1e57d1c76850e"
+  digest = "1:1f655106d1c266b3d22c75ac58749479f10927f35ef648cce4b6c8351895dc0a"
+  name = "github.com/threefoldtech/FFTChain"
+  packages = [
+    "pkg/config",
+    "pkg/types",
+  ]
+  pruneopts = "UT"
+  revision = "911adef0ffd0fa1dcc286cf87cd8730b0338608f"
+
+[[projects]]
+  branch = "master"
+  digest = "1:cb44656a7868f43c12658a26560e1dd0c46c01497b44b9725900bce6593604a7"
   name = "github.com/threefoldtech/rivine"
   packages = [
     "build",
@@ -134,7 +145,7 @@
     "types",
   ]
   pruneopts = "UT"
-  revision = "0f41a77bcdbaa12977990d2bf056e8cdf4b6519a"
+  revision = "3d6777f80e18c92b86fbf654b462ada61b877046"
 
 [[projects]]
   branch = "master"
@@ -182,7 +193,7 @@
     "twofish",
   ]
   pruneopts = "UT"
-  revision = "227b76d455e791cb042b03e633e2f7fbcfdf74a5"
+  revision = "9ee001bba392397c76f100a2d5b13afc86f167f1"
 
 [[projects]]
   branch = "master"
@@ -194,18 +205,18 @@
     "html/charset",
   ]
   pruneopts = "UT"
-  revision = "24e19bdeb0f2d062d8e2640d50a7aaf2a7f80e7a"
+  revision = "aa69164e4478b84860dc6769c710c699c67058a3"
 
 [[projects]]
   branch = "master"
-  digest = "1:d674897448caf197caa185f734eea882573eecffbcc82ab2d9361c8107edc24c"
+  digest = "1:1c2dd8ba87cd5ea5bd357f11a9c8a3d898b579294598671db1dcac25d19a9307"
   name = "golang.org/x/sys"
   packages = [
     "cpu",
     "unix",
   ]
   pruneopts = "UT"
-  revision = "c3b328c6e5a763a2bfc82a48b4bd855037210934"
+  revision = "2837fb4f24fee082b8c39b1a6dc9e0ed9f3fbd4f"
 
 [[projects]]
   digest = "1:8a0baffd5559acaa560f854d7d525c02f4fec2d4f8a214398556fb661a10f6e0"
@@ -242,6 +253,8 @@
     "github.com/bgentry/speakeasy",
     "github.com/julienschmidt/httprouter",
     "github.com/spf13/cobra",
+    "github.com/threefoldtech/FFTChain/pkg/config",
+    "github.com/threefoldtech/FFTChain/pkg/types",
     "github.com/threefoldtech/rivine/build",
     "github.com/threefoldtech/rivine/extensions/minting",
     "github.com/threefoldtech/rivine/extensions/minting/api",
