@@ -107,18 +107,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1f655106d1c266b3d22c75ac58749479f10927f35ef648cce4b6c8351895dc0a"
-  name = "github.com/threefoldtech/FFTChain"
-  packages = [
-    "pkg/config",
-    "pkg/types",
-  ]
-  pruneopts = "UT"
-  revision = "911adef0ffd0fa1dcc286cf87cd8730b0338608f"
-
-[[projects]]
-  branch = "master"
-  digest = "1:cb44656a7868f43c12658a26560e1dd0c46c01497b44b9725900bce6593604a7"
+  digest = "1:6acdcaf31bf36e29d10d82d550eadf209022a8345442fbf92088feef3e7c9a50"
   name = "github.com/threefoldtech/rivine"
   packages = [
     "build",
@@ -145,7 +134,7 @@
     "types",
   ]
   pruneopts = "UT"
-  revision = "3d6777f80e18c92b86fbf654b462ada61b877046"
+  revision = "01f2a997d0f6cc1f7509c91125eadaf76f4a6b5a"
 
 [[projects]]
   branch = "master"
@@ -253,8 +242,6 @@
     "github.com/bgentry/speakeasy",
     "github.com/julienschmidt/httprouter",
     "github.com/spf13/cobra",
-    "github.com/threefoldtech/FFTChain/pkg/config",
-    "github.com/threefoldtech/FFTChain/pkg/types",
     "github.com/threefoldtech/rivine/build",
     "github.com/threefoldtech/rivine/extensions/minting",
     "github.com/threefoldtech/rivine/extensions/minting/api",

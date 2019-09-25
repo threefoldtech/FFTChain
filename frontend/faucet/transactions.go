@@ -25,7 +25,7 @@ func dripCoins(address types.UnlockHash, amount types.Currency) (types.Transacti
 	log.Println("[DEBUG] Dripping", amount.String(), "coins to address", address.String())
 
 	var resp api.WalletCoinsPOSTResp
-	err = httpClient.PostResp("/wallet/coins", string(data), &resp)
+	err = httpClient.PostWithResponse("/wallet/coins", string(data), &resp)
 	if err != nil {
 		log.Println("[ERROR] /wallet/coins - request body:", string(data))
 	}
