@@ -129,7 +129,7 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 				}
 			}()
 
-			// register the minting extension plugin
+			// create the minting extension plugin
 			mintingPlugin = minting.NewMintingPlugin(
 				setupNetworkCfg.GenesisMintCondition,
 				fftchaintypes.TransactionVersionMinterDefinition,
@@ -138,6 +138,10 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 					CoinDestructionTransactionVersion: fftchaintypes.TransactionVersionCoinDestruction,
 				},
 			)
+			// add the HTTP handlers for the auth coin tx extension as well
+			mintingapi.RegisterConsensusMintingHTTPHandlers(router, mintingPlugin)
+
+			// register the minting extension plugin
 			err = cs.RegisterPlugin(ctx, "minting", mintingPlugin)
 			if err != nil {
 				servErrs <- fmt.Errorf("failed to register the minting extension: %v", err)
@@ -148,8 +152,6 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 				cancel()
 				return
 			}
-			// add the HTTP handlers for the auth coin tx extension as well
-			mintingapi.RegisterConsensusMintingHTTPHandlers(router, mintingPlugin)
 
 		}
 
