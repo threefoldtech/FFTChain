@@ -11,7 +11,7 @@ type CommandLineClient struct {
 
 // NewCommandLineClient creates a new fftchain commandline client
 func NewCommandLineClient(address, name, userAgent string) (*CommandLineClient, error) {
-	client, err := client.NewCommandLineClient(address, name, userAgent)
+	client, err := client.NewCommandLineClient(address, name, userAgent, nil)
 	if err != nil {
 		return nil, err
 	}
