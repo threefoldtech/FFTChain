@@ -571,8 +571,8 @@ function appendV130Transaction(infoBody, explorerTransaction, confirmed) {
 	if (explorerTransaction.rawtransaction.data.coininputs != null && explorerTransaction.rawtransaction.data.coininputs.length > 0) {
 		appendStat(table, 'Coin Input Count', explorerTransaction.rawtransaction.data.coininputs.length);
 	}
-	if (explorerTransaction.rawtransaction.data.refundcoinoutput != null) {
-		appendStat(table, 'Refund Coin Output', 'yes');
+	if (explorerTransaction.rawtransaction.data.coinoutputs) {
+		appendStat(table, 'Refund Coin Outputs', 'yes');
 	}
 	if (explorerTransaction.rawtransaction.data.arbitrarydata != null) {
 		appendStat(table, 'Arbitrary Data Byte Count',  decodeBase64ArrayBuffer(explorerTransaction.rawtransaction.data.arbitrarydata).length);
@@ -608,35 +608,40 @@ function appendV130Transaction(infoBody, explorerTransaction, confirmed) {
 			coinsBurnedAmount += +cir.amount;
 		}
 	}
-	var refundcoinoutput = explorerTransaction.rawtransaction.data.refundcoinoutput;
-	if (refundcoinoutput != null) {
-		appendStatTableTitle(infoBody, 'Refund Coin Output');
+	if (explorerTransaction.rawtransaction.data.coinoutputs) {
+		appendStatTableTitle(infoBody, 'Refund Coin Outputs');
 		var f;
 		var cor;
-		switch (refundcoinoutput.condition.type) {
-			// handle nil transactions
-			case undefined:
-			case 0:
-				f = addV1NilOutput;
-				break;
-			case 1:
-				f = addV1T1Output;
-				break;
-			case 2:
-				f = addV1T2Output;
-				break;
-			case 3:
-				f = addV1T3Output;
-				break;
-			case 4:
-				f = addV1T4Output;
-				break;
-		}
-		if (f !== null) {
-			var outputTable = createStatsTable()
-			cor = f(ctx, outputTable, explorerTransaction, 0, 'coins', [refundcoinoutput]);
-			infoBody.appendChild(outputTable)
-			coinsBurnedAmount -= +cor.value;
+		for(var cidx = 0; cidx < explorerTransaction.rawtransaction.data.coinoutputs.length; cidx++) {
+			var refundcoinoutput = explorerTransaction.rawtransaction.data.coinoutputs[cidx];
+			switch (refundcoinoutput.condition.type) {
+				// handle nil transactions
+				case undefined:
+				case 0:
+					f = addV1NilOutput;
+					break;
+				case 1:
+					f = addV1T1Output;
+					break;
+				case 2:
+					f = addV1T2Output;
+					break;
+				case 3:
+					f = addV1T3Output;
+					break;
+				case 4:
+					f = addV1T4Output;
+					break;
+				default:
+					f = null;
+					break;
+			}
+			if (f !== null) {
+				var outputTable = createStatsTable()
+				cor = f(ctx, outputTable, explorerTransaction, cidx, 'coins');
+				infoBody.appendChild(outputTable)
+				coinsBurnedAmount -= +cor.value;
+			}
 		}
 	}
 	if (explorerTransaction.rawtransaction.data.arbitrarydata != null) {
