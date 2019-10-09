@@ -2,6 +2,9 @@ function fillGeneralStats() {
 	var request = new XMLHttpRequest();
 	request.open('GET', '/explorer', true);
 	request.onload = function() {
+		if (request.status !== 200) {
+			return;
+		}
 		var explorerStatus = JSON.parse(request.responseText);
 
 		var height = document.getElementById('height');
