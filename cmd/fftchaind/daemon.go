@@ -167,7 +167,30 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 					fmt.Println("Error during consensus set shutdown:", err)
 				}
 			}()
+		}
 
+		var tpool modules.TransactionPool
+		if moduleIdentifiers.Contains(daemon.TransactionPoolModule.Identifier()) {
+			printModuleIsLoading("transaction pool")
+			tpool, err = transactionpool.New(cs, g,
+				filepath.Join(cfg.RootPersistentDir, modules.TransactionPoolDir),
+				cfg.BlockchainInfo, networkCfg.Constants, cfg.VerboseLogging)
+			if err != nil {
+				servErrs <- err
+				cancel()
+				return
+			}
+			rivineapi.RegisterTransactionPoolHTTPHandlers(router, cs, tpool, cfg.APIPassword)
+			defer func() {
+				fmt.Println("Closing transaction pool...")
+				err := tpool.Close()
+				if err != nil {
+					fmt.Println("Error during transaction pool shutdown:", err)
+				}
+			}()
+		}
+
+		if cs != nil {
 			// create the minting extension plugin
 			mintingPlugin = minting.NewMintingPlugin(
 				setupNetworkCfg.GenesisMintCondition,
@@ -194,26 +217,6 @@ func runDaemon(cfg ExtendedDaemonConfig, moduleIdentifiers daemon.ModuleIdentifi
 
 		}
 
-		var tpool modules.TransactionPool
-		if moduleIdentifiers.Contains(daemon.TransactionPoolModule.Identifier()) {
-			printModuleIsLoading("transaction pool")
-			tpool, err = transactionpool.New(cs, g,
-				filepath.Join(cfg.RootPersistentDir, modules.TransactionPoolDir),
-				cfg.BlockchainInfo, networkCfg.Constants, cfg.VerboseLogging)
-			if err != nil {
-				servErrs <- err
-				cancel()
-				return
-			}
-			rivineapi.RegisterTransactionPoolHTTPHandlers(router, cs, tpool, cfg.APIPassword)
-			defer func() {
-				fmt.Println("Closing transaction pool...")
-				err := tpool.Close()
-				if err != nil {
-					fmt.Println("Error during transaction pool shutdown:", err)
-				}
-			}()
-		}
 		var w modules.Wallet
 		if moduleIdentifiers.Contains(daemon.WalletModule.Identifier()) {
 			printModuleIsLoading("wallet")
