@@ -20,16 +20,16 @@ func main() {
 	// create cli
 	bchainInfo := config.GetBlockchainInfo()
 	cliClient, err := NewCommandLineClient("http://localhost:22311", bchainInfo.Name, daemon.RivineUserAgent)
-	if err != nil {
-		panic(err)
-	}
+	exitIfError(err)
 
-	// register goldchain-specific explorer commands
-	mintingcli.CreateExploreCmd(cliClient.CommandLineClient)
-	mintingcli.CreateConsensusCmd(cliClient.CommandLineClient)
+	// register minting specific commands
+	err = mintingcli.CreateConsensusCmd(cliClient.CommandLineClient)
+	exitIfError(err)
+	err = mintingcli.CreateExploreCmd(cliClient.CommandLineClient)
+	exitIfError(err)
 
 	// add cli wallet extension commands
-	mintingcli.CreateWalletCmds(
+	err = mintingcli.CreateWalletCmds(
 		cliClient.CommandLineClient,
 		types.TransactionVersionMinterDefinition,
 		types.TransactionVersionCoinCreation,
@@ -37,6 +37,7 @@ func main() {
 			CoinDestructionTxVersion: types.TransactionVersionCoinDestruction,
 		},
 	)
+	exitIfError(err)
 
 	// define preRun function
 	cliClient.PreRunE = func(cfg *client.Config) (*client.Config, error) {
@@ -48,7 +49,7 @@ func main() {
 			cfg = &newCfg
 		}
 
-		bc, err := client.NewBaseClientFromCommandLineClient(cliClient.CommandLineClient)
+		bc, err := client.NewLazyBaseClientFromCommandLineClient(cliClient.CommandLineClient)
 		if err != nil {
 			return nil, err
 		}
@@ -79,4 +80,15 @@ func main() {
 		// Command.SilenceUsage is false) and we should exit with exitCodeUsage.
 		os.Exit(cli.ExitCodeUsage)
 	}
+}
+
+func exitIfError(err error) {
+	if err != nil {
+		exitWithError(err)
+	}
+}
+
+func exitWithError(err error) {
+	fmt.Fprintln(os.Stderr, "client exited during setup with an error:", err)
+	os.Exit(cli.ExitCodeGeneral)
 }
